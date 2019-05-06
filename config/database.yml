@@ -6,6 +6,8 @@ default: &default
 development:
   <<: *default
   database: grill_master_development
+  username: postgres
+  password: xyzxyz
 
 test:
   <<: *default
