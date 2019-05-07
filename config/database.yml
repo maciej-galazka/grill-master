@@ -12,6 +12,8 @@ development:
 test:
   <<: *default
   database: grill_master_test
+  username: postgres
+  password: xyzxyz
 
 production:
   <<: *default
