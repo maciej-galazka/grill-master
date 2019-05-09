@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_050342) do
+ActiveRecord::Schema.define(version: 2019_05_08_200506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "discounts", force: :cascade do |t|
+    t.string "kind"
+    t.string "name"
+    t.integer "product_ids", array: true
+    t.float "price"
+    t.integer "count"
+  end
 
   create_table "items", force: :cascade do |t|
     t.integer "quantity"
@@ -31,5 +39,4 @@ ActiveRecord::Schema.define(version: 2019_05_07_050342) do
     t.index ["name"], name: "index_products_on_name", unique: true
   end
 
-  add_foreign_key "items", "products"
 end

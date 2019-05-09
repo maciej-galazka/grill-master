@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: MyString
+  name: MyString
+  product_ids: 
+  price: 
+  count: 1
+
+two:
+  kind: MyString
+  name: MyString
+  product_ids: 
+  price: 
+  count: 1
