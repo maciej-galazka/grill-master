@@ -14,6 +14,8 @@ class Carts::DiscountsController < ApplicationController
       @discount.count = params[:count]
     end
     @discount.save
+
+    render_items_and_discounts
   end
   # PUT /cart/discounts/1
   # PATCH /cart/discounts/1
@@ -35,8 +37,8 @@ class Carts::DiscountsController < ApplicationController
       @discount.price = nil 
       @discount.count = params[:count] if params[:count] != nil
     end
-
     @discount.save
+
+    render_items_and_discounts
   end
-  
 end

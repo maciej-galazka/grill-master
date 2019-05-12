@@ -1,7 +1,5 @@
 class CartsController < ApplicationController
   def show
-    @items = Item.where("quantity > ?", 0)
-    @discounts = Discount.all
-    render json: {"Items" => @items.as_json, "Discounts" => @discounts.as_json}
+    render_items_and_discounts
   end
 end

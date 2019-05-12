@@ -16,12 +16,7 @@ class Carts::ItemsController < ApplicationController
     end
     @item.save
 
-
-    @items = Item.joins(:product).order(:id).select do |m|
-      m.quantity > 0
-    end
-
-    render json: @items
+    render_items_and_discounts
   end
 
   # PATCH /cart/items/1
@@ -33,11 +28,6 @@ class Carts::ItemsController < ApplicationController
     @item.quantity = quantity
     @item.save
 
-
-    @items = Item.joins(:product).select do |m|
-      m.quantity > 0
-    end
-
-    render json: @items
+    render_items_and_discounts
   end
 end

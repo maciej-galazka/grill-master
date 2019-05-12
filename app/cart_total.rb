@@ -2,25 +2,14 @@ require_relative 'models/product.rb'
 require_relative 'models/item.rb'
 require_relative 'models/discount.rb'
 
-class DiscountProper
-  attr_accessor :price, :products, :kind, :name
-  
-  def degenerate
-    dd = DiscountDegenerate.new
-    dd.name = @name
-    dd.products = @products
-    dd.total = @price
-    dd
-  end 
-end
-
-class DiscountDegenerate
-  attr_accessor :name, :products, :total
-end
 
 class CartTotal
   attr_reader :min_price, :best_discounts, :regular_products, :regular_price
 
+  def initialize
+    initialize_items
+    initialize_discounts
+  end
   def initialize_discounts
     discounts = Discount.all
     @discounts_proper = []
@@ -71,7 +60,6 @@ class CartTotal
       how_many_dp_taken = 0
       while take_out(dp, products_in_discount_locally)
         @discounts_taken.add(dp)
-        @price
         how_many_dp_taken += 1
         explore_permutation(depth + 1)
       end
@@ -93,11 +81,22 @@ class CartTotal
   end
   private
   def take_out(dp, products_in_discount)
+    local_regular_price = 0.0
+    dp.products.each do |product|
+      if @considered_products.count(product) > 0
+        local_regular_price += product.price
+      end
+    end
+    if local_regular_price <= dp.price
+      return false
+    end
+
     some_taken = false
     dp.products.each do |product|
       if @considered_products.count(product) > 0
         @considered_products.delete(product)
         products_in_discount.add(product)
+        local_regular_price += product.price
         some_taken = true
       end
     end
